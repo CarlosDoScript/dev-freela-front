@@ -1,44 +1,42 @@
-<div class="ld-login">
-    <div class="ld-wrapper">
-     
-        <app-ld-header></app-ld-header>
+<div class="ld-register">
+    <app-ld-wrapper>
 
-        <main class="main-content">
-            <form [formGroup]="form" class="left" (ngSubmit)="cadastrar()">
-                <h1 class="main-title">
-                    <span class="up">Olá!</span>
-                    <span class="down">Vamos criar seu cadastro.</span>
-                </h1>
+        <form [formGroup]="form" class="left" (ngSubmit)="cadastrar()">
+            <h1 class="main-title">
+                <span class="up">Olá!</span>
+                <span class="down">Vamos criar seu cadastro.</span>
+            </h1>
 
-                <div class="radio-buttons">
-                    <h3 class="title">Qual o seu perfil?</h3>
-                    <div class="buttons">
-                        <label class="ld-radio">
-                            Dev
-                            <input type="radio" formControlName="role" value="dev">
-                            <span class="checkmark"></span>
-                        </label>
+            <div class="radio-buttons">
+                <h3 class="title">Qual o seu perfil?</h3>
+                <div class="buttons">
+                    <label class="ld-radio">
+                        Dev
+                        <input type="radio" formControlName="role" value="dev">
+                        <span class="checkmark"></span>
+                    </label>
 
-                        <label class="ld-radio">
-                            Cliente
-                            <input type="radio" formControlName="role" value="cliente">
-                            <span class="checkmark"></span>
-                        </label>
-                    </div>
+                    <label class="ld-radio">
+                        Cliente
+                        <input type="radio" formControlName="role" value="cliente">
+                        <span class="checkmark"></span>
+                    </label>
                 </div>
-
-                <input formControlName="fullName" class="ld-input" placeholder="Nome completo">
-                <input formControlName="birthDate" type="date" class="ld-input" placeholder="Data de nascimento">
-                <input formControlName="email" type="email" class="ld-input" placeholder="Email">
-                <input formControlName="password" type="password" class="ld-input" placeholder="Senha">
-
-                <button type="submit" class="ld-button">Continuar</button>
-
-            </form>
-            <div class="right">
-                <img class="image" alt="Fundo de decoração com 3 cubos com fundo gradient das cores do arco-iris"
-                    src="assets/image/bg-cubes.png">
             </div>
-        </main>
-    </div>
+
+            <input formControlName="fullName" class="ld-input" placeholder="Nome completo">
+            <input formControlName="birthDate" type="date" class="ld-input" placeholder="Data de nascimento">
+            <input formControlName="email" type="email" class="ld-input" placeholder="Email">
+            <input formControlName="password" type="password" class="ld-input" placeholder="Senha">
+
+            <app-ld-button text="Continuar"
+            ></app-ld-button>
+
+        </form>
+        <div class="right">
+            <img class="image" alt="Fundo de decoração com 3 cubos com fundo gradient das cores do arco-iris"
+                src="assets/image/bg-cubes.png">
+        </div>
+
+    </app-ld-wrapper>
 </div>

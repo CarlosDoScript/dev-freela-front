@@ -2,15 +2,17 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import Swal from 'sweetalert2'
 import { RegisterService } from '@app/services';
-import { LdHeaderComponent } from '../../features/ld-header/ld-header.component';
+import { LdButtonComponent } from "../../shared/components/ld-button/ld-button.component";
+import { LdWrapperComponent } from '@app/features/ld-wrapper/ld-wrapper.component';
 
 @Component({
   standalone: true,
   selector: 'app-register',
   imports: [
     ReactiveFormsModule,
-    LdHeaderComponent
-  ],
+    LdButtonComponent,
+    LdWrapperComponent
+],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })
