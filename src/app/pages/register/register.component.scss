@@ -1,0 +1,54 @@
+.ld-login {
+
+  .ld-wrapper {
+
+    .main-content {
+
+      >.left {
+        max-width: 450px;
+        margin: auto;
+
+        >.radio-buttons {
+          margin-bottom: 42px;
+
+          .title {
+            font-size: calc(var(--ld-font-size-base) + 8px);
+            font-weight: 800;
+            margin-bottom: 16px;
+          }
+
+          .buttons {
+            .ld-radio {
+              margin-right: 70px;
+            }
+          }
+
+        }
+
+        >.main-title {
+          font-weight: 800;
+          margin-bottom: 40px;
+
+          >.up {
+            font-size: calc(var(--ld-font-size-base) + 38px);
+            display: block;
+            margin-bottom: 7px;
+          }
+
+          >.down {
+            font-size: calc(var(--ld-font-size-base) + 22px);
+          }
+
+        }
+
+        >.steps {
+          display: block;
+          font-weight: 800;
+          font-size: calc(var(--ld-font-size-base) + 4px);
+          color: var(--ld-color-gray);
+          margin-bottom: 13px;
+        }
+      }
+    }
+  }
+}
