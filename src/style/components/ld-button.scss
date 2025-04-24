@@ -11,14 +11,14 @@
     cursor: pointer;
     transition: background-color 0.5s;
     text-decoration: none;
-}
 
-.ld-button.-small {
-    font-size: calc(var(--ld-font-size-base) + 4px);
-    font-weight: 600;
-    padding: 12px 27px;
-}
-
-.ld-button:hover {
-    background-color: var(--ld-color-primary-light);
+    &.-small {
+        font-size: calc(var(--ld-font-size-base) + 4px);
+        font-weight: 600;
+        padding: 12px 27px;
+    }
+    
+    &:hover {
+        background-color: var(--ld-color-primary-light);
+    }
 }

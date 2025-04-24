@@ -9,12 +9,12 @@
     padding-bottom: 10px;
     width: 100%;
     margin-bottom: 32px;
-}
 
-.ld-input:focus {
-    border-color: var(--ld-color-primary);
-}
-
-.ld-input::placeholder {
-    color: var(--ld-color-gray-dark);
+    &:focus {
+        border-color: var(--ld-color-primary);
+    }
+    
+    &::placeholder {
+        color: var(--ld-color-gray-dark);
+    }
 }
