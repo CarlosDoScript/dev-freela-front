@@ -1,12 +1,7 @@
 <div class="ld-login">
     <div class="ld-wrapper">
-        <header class="ld-header">
-            <div class="wrapper">
-                <div class="image-wrapper">
-                    <img alt="Logo da DevFreela" class="image" src="assets/logo/devfreela.svg">
-                </div>
-            </div>
-        </header>
+     
+        <app-ld-header></app-ld-header>
 
         <main class="main-content">
             <form [formGroup]="form" class="left" (ngSubmit)="cadastrar()">
