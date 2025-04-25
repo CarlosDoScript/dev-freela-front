@@ -1,2 +1,2 @@
-@import 'box-sizing',
-        'reset';
+@use 'box-sizing' as box;
+@use 'reset' as reset;

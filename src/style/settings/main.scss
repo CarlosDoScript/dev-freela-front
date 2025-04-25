@@ -1,4 +1,4 @@
-@import 'color',
-        'core',
-        'wrapper',
-        'text';
+@use 'color' as color;
+@use 'core' as core;
+@use 'wrapper' as wrapper;
+@use 'text' as text;

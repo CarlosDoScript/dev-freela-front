@@ -4,6 +4,8 @@ import Swal from 'sweetalert2'
 import { RegisterService } from '@app/services';
 import { LdButtonComponent } from "../../shared/components/ld-button/ld-button.component";
 import { LdWrapperComponent } from '@app/features/ld-wrapper/ld-wrapper.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
 
 @Component({
   standalone: true,
@@ -11,7 +13,9 @@ import { LdWrapperComponent } from '@app/features/ld-wrapper/ld-wrapper.componen
   imports: [
     ReactiveFormsModule,
     LdButtonComponent,
-    LdWrapperComponent
+    LdWrapperComponent,
+    MatFormFieldModule,
+    MatInputModule
 ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'

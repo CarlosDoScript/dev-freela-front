@@ -1,4 +1,14 @@
-@import 'settings/main.scss',
-        'generic/main.scss',
-        'base/main.scss',
-        'components/main.scss';
+@use 'settings/main'as settings;
+@use 'generic/main'as generic;
+@use 'base/main'as base;
+@use 'components/main'as components;
+@use 'plugins/main'as plugins;
+
+
+.mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-floating-label {
+  color: var(--ld-color-gray-dark);
+}
+
+form .mat-mdc-form-field {
+  width: 100% !important;
+}
