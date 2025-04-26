@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { IUser } from './interfaces/IUser';
-import { AuthService } from '../../services/auth.service';
+import { IUserHeader } from './interfaces/IUserHeader';
+import { AuthService } from '@app/core/services';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
 })
 export class LdHeaderComponent implements OnInit {
 
-  user: IUser = {};
+  user: IUserHeader = {};
   isLoggedIn = false;
 
   constructor(private authService: AuthService){}

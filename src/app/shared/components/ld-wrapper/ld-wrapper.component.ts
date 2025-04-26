@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LdHeaderComponent } from '../ld-header/ld-header.component';
+import { LdHeaderComponent } from '../../../shared/components/ld-header/ld-header.component';
 
 @Component({
   standalone: true,

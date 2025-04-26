@@ -1,13 +1,15 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import Swal from 'sweetalert2'
-import { RegisterService } from '@app/services';
+import { RegisterService } from './services/register.service';
 import { LdButtonComponent } from "../../shared/components/ld-button/ld-button.component";
-import { LdWrapperComponent } from '@app/features/ld-wrapper/ld-wrapper.component';
+import { LdWrapperComponent } from '@app/shared/components/ld-wrapper/ld-wrapper.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { CommonModule } from '@angular/common';
 import { message } from '@app/shared/utils/message';
+import { Router } from '@angular/router';
+import { IUser } from './interfaces/IUser';
 
 @Component({
   standalone: true,
@@ -23,13 +25,16 @@ import { message } from '@app/shared/utils/message';
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })
+
 export class RegisterComponent {
-  registerForm: FormGroup;
+
+  registerForm!: FormGroup;
   message = message;
 
   constructor(
     private fb: FormBuilder,
     private registerService: RegisterService,
+    private router: Router
   ) {
     this.registerForm = this.fb.group({
       role: ['', Validators.required],
@@ -47,28 +52,40 @@ export class RegisterComponent {
       return;
     }
 
-    const payload = this.registerForm.value;
+    let payload: IUser = this.registerForm.value;
 
-    this.registerService.cadastrar(payload).subscribe({
-      next: (response) => {
-        Swal.fire({
-          title: 'Bom Trabalho!',
-          text: 'Cadastrado com sucesso!',
-          icon: 'success',
-          confirmButtonText: 'Ok!'
-        }).then((result) => {
-          if (result.isConfirmed) {
+    this.registerService
+      .postUser(payload)
+      .subscribe({
+        next: (response) => {
+          Swal.fire({
+            title: 'Bom Trabalho!',
+            text: 'Cadastrado com sucesso!',
+            icon: 'success',
+            confirmButtonText: 'Ok!'
+          }).then((result) => {
+            
+            if (!result.isConfirmed) {
+              return;
+            }
 
             //Apenas para fins de desenvolvimento pois não há autenticação
             localStorage.setItem('userName', response.fullName);
             localStorage.setItem('role', response.role === 'dev' ? 'Desenvolvedor' : 'Cliente');
             localStorage.setItem('idClient', response.id);
 
-            window.location.href = 'list.html';
-          }
-        });
-      }
-    })
+            this.router.navigate(['list']);
+          });
+        },
+        error: (error) => {
+          Swal.fire({
+            title: 'Erro!',
+            text: 'Falha ao cadastrar. Tente novamente.',
+            icon: 'error',
+            confirmButtonText: 'Ok'
+          });
+        }
+      })
   }
 
   toogleRole(role: 'dev' | 'cliente') {
@@ -76,8 +93,7 @@ export class RegisterComponent {
   }
 
   isInvalid(inputName: string, validatorName: string) {
-    return this.registerForm.get(inputName)?.errors?.[validatorName] &&
-      this.registerForm.get(inputName)?.touched;
+    const control = this.registerForm.get(inputName);
+    return !!(control?.errors?.[validatorName] && control.touched);
   }
-
 }

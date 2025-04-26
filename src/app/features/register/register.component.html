@@ -3,6 +3,8 @@
 
     <form [formGroup]="registerForm" class="left" (ngSubmit)="cadastrar()">
 
+      {{registerForm.value | json}}
+
       <h1 class="main-title">
         <span class="up">Olá!</span>
         <span class="down">Vamos criar seu cadastro.</span>

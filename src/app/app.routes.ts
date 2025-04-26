@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { registerRoutes } from './pages/register/register.route';
+import { registerRoutes } from './features/register/register.route';
 
 
 export const routes: Routes = [

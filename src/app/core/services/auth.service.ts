@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { IUser } from "../features/ld-header/interfaces/IUser";
+import { IUserHeader } from "@app/shared/components/ld-header/interfaces/IUserHeader";
 
 @Injectable({
     providedIn: 'root'
@@ -11,7 +11,7 @@ export class AuthService{
         return localStorage.getItem('userName') != null && localStorage.getItem('role') != null;
     }
 
-    getUser():IUser{
+    getUser():IUserHeader{
         return {
             name: localStorage.getItem('userName') ?? '',
             role: localStorage.getItem('role') ?? ''
