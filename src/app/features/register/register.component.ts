@@ -74,7 +74,7 @@ export class RegisterComponent {
             localStorage.setItem('role', response.role === 'dev' ? 'Desenvolvedor' : 'Cliente');
             localStorage.setItem('idClient', response.id);
 
-            this.router.navigate(['list']);
+            this.router.navigate(['project/list']);
           });
         },
         error: (error) => {

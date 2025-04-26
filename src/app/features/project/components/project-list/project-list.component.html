@@ -1,0 +1,37 @@
+<div class="ld-list">
+    <app-ld-wrapper type="one-col">
+        <div class="title-button">
+            <h1 class="title">Projetos</h1>
+            <div class="button-wrapper">
+                <app-ld-button text="Novo Projeto"></app-ld-button>
+            </div>
+        </div>
+
+        <div class="table-wrapper" *ngIf="projects.length > 0">
+            <div class="ld-table">
+                <div class="head">
+                    <div class="row">
+                        <div>Título</div>
+                        <div>Custo Total</div>
+                        <div>Ações</div>
+                    </div>
+                </div>
+                <div class="body">
+                    @for (project of projects; track $index) {
+                    <div class="row">
+                        <div class="title-description">
+                            <h6 class="title">{{project.title}}</h6>
+                            <p class="description">{{project.description}}</p>
+                        </div>
+                        <div class="price">{{project.totalCost | currency}}</div>
+                        <div class="actions">
+                            <span class="edit material-icons" (click)="EditProject(project.id)">edit</span>
+                            <span class="edit material-icons" (click)="DeleteProject(project.id)">delete_outline</span>
+                        </div>
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </app-ld-wrapper>
+</div>

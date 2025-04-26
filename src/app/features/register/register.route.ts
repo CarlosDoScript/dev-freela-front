@@ -1,4 +1,4 @@
-import { Route, Routes } from "@angular/router";
+import { Routes } from "@angular/router";
 
 const registerPage = () => import('./register.component').then(m => m.RegisterComponent);
 

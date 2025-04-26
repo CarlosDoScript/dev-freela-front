@@ -1,0 +1,1 @@
+export type TLdWrapperCol = 'one-col' | 'two-col';
