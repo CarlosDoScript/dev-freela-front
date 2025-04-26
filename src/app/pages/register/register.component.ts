@@ -4,8 +4,10 @@ import Swal from 'sweetalert2'
 import { RegisterService } from '@app/services';
 import { LdButtonComponent } from "../../shared/components/ld-button/ld-button.component";
 import { LdWrapperComponent } from '@app/features/ld-wrapper/ld-wrapper.component';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { CommonModule } from '@angular/common';
+import { message } from '@app/shared/utils/message';
 
 @Component({
   standalone: true,
@@ -15,39 +17,37 @@ import {MatInputModule} from '@angular/material/input';
     LdButtonComponent,
     LdWrapperComponent,
     MatFormFieldModule,
-    MatInputModule
-],
+    MatInputModule,
+    CommonModule
+  ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })
 export class RegisterComponent {
-  form: FormGroup;
+  registerForm: FormGroup;
+  message = message;
 
   constructor(
     private fb: FormBuilder,
     private registerService: RegisterService,
   ) {
-    this.form = this.fb.group({
+    this.registerForm = this.fb.group({
       role: ['', Validators.required],
       fullName: ['', Validators.required],
       birthDate: ['', Validators.required],
-      email: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]]
     });
   }
 
   cadastrar() {
-    if (!this.form.value.role) {
-      Swal.fire('Algo de errado...', 'Marque alguma role!', 'error')
+
+    if (!this.registerForm.valid) {
+      this.registerForm.markAllAsTouched();
       return;
     }
 
-    if (this.form.invalid) {
-      Swal.fire('Campos obrigatórios', 'Preencha todos os campos corretamente!', 'error')
-      return;
-    }
-
-    const payload = this.form.value;
+    const payload = this.registerForm.value;
 
     this.registerService.cadastrar(payload).subscribe({
       next: (response) => {
@@ -70,4 +70,14 @@ export class RegisterComponent {
       }
     })
   }
+
+  toogleRole(role: 'dev' | 'cliente') {
+    this.registerForm.get('role')?.setValue(role);
+  }
+
+  isInvalid(inputName: string, validatorName: string) {
+    return this.registerForm.get(inputName)?.errors?.[validatorName] &&
+      this.registerForm.get(inputName)?.touched;
+  }
+
 }
