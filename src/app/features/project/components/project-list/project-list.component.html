@@ -3,7 +3,8 @@
         <div class="title-button">
             <h1 class="title">Projetos</h1>
             <div class="button-wrapper">
-                <app-ld-button text="Novo Projeto"></app-ld-button>
+                <app-ld-button text="Novo Projeto"
+                    (click)="navigation.redirectTo('project/create-edit')"></app-ld-button>
             </div>
         </div>
 
@@ -25,7 +26,8 @@
                         </div>
                         <div class="price">{{project.totalCost | currency}}</div>
                         <div class="actions">
-                            <span class="edit material-icons" (click)="EditProject(project.id)">edit</span>
+                            <span class="edit material-icons"
+                                (click)="navigation.redirectToWithParams('project/create-edit',project.id)">edit</span>
                             <span class="edit material-icons" (click)="DeleteProject(project.id)">delete_outline</span>
                         </div>
                     </div>

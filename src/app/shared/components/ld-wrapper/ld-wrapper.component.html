@@ -1,10 +1,13 @@
-    <div class="ld-wrapper">
+<div class="ld-wrapper">
 
-      <app-ld-header></app-ld-header>
+  <app-ld-header></app-ld-header>
 
-      <main class="main-content"
-        [class.-one-col]="type === 'one-col'"
-      >
-        <ng-content></ng-content>
-      </main>
-    </div>
+  <main class="main-content" [class.-one-col]="type === 'one-col'">
+
+    <a *ngIf="back !== ''" class="back-btn material-icons" (click)="navigation.redirectTo(back)">
+      keyboard_arrow_left
+    </a>
+
+    <ng-content></ng-content>
+  </main>
+</div>

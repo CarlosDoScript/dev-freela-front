@@ -5,6 +5,7 @@ import { ProjectService } from '../../services/project.service';
 import { IListProject } from '../../interfaces/IListProject';
 import Swal from 'sweetalert2';
 import { LdButtonComponent } from "../../../../shared/components/ld-button/ld-button.component";
+import { Navigation } from '@app/shared/utils/navigation';
 
 @Component({
   standalone: true,
@@ -21,7 +22,8 @@ import { LdButtonComponent } from "../../../../shared/components/ld-button/ld-bu
 export class ProjectListComponent implements OnInit {
   projects: IListProject[] = [];
 
-  constructor(private projectService: ProjectService) { }
+  constructor(private projectService: ProjectService, public navigation: Navigation) {
+   }
 
   ngOnInit(): void {
     this.getProjects();
@@ -45,10 +47,7 @@ export class ProjectListComponent implements OnInit {
       })
   };
 
-  EditProject(id: number) {
-  }
-
-  DeleteProject(id: number) {
+  DeleteProject(id: string) {
     Swal.fire({
       title: 'Tem certeza?',
       text: "Essa ação não poderá ser desfeita!",

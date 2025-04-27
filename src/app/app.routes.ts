@@ -8,7 +8,7 @@ export const routes: Routes = [
         children: registerRoutes
     },
     {
-        path: 'project/list',
+        path: 'project',
         children: projectRoutes
     }
 ];

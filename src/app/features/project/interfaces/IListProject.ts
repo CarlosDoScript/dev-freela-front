@@ -1,5 +1,5 @@
 export interface IListProject{
-    id: number,
+    id: string,
     title: string,
     description: string,
     totalCost: number,

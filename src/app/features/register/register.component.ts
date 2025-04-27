@@ -10,6 +10,7 @@ import { CommonModule } from '@angular/common';
 import { message } from '@app/shared/utils/message';
 import { Router } from '@angular/router';
 import { IUser } from './interfaces/IUser';
+import { LdBgCubesComponent } from "../../shared/components/ld-bg-cubes/ld-bg-cubes.component";
 
 @Component({
   standalone: true,
@@ -20,8 +21,9 @@ import { IUser } from './interfaces/IUser';
     LdWrapperComponent,
     MatFormFieldModule,
     MatInputModule,
-    CommonModule
-  ],
+    CommonModule,
+    LdBgCubesComponent
+],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })

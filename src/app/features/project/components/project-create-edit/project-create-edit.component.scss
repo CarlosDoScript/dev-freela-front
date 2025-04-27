@@ -1,0 +1,17 @@
+.ld-project-create-edit {
+    .left {
+      max-width: 368px;
+      margin: auto;
+  
+      >.ld-button {
+        margin-top: 40px;
+      }
+  
+      >.main-title {
+        font-size: calc(var(--ld-font-size-base) + 32px);
+        font-weight: 800;
+        max-width: 415px;
+        margin-bottom: 40px;
+      }
+    }
+  }
