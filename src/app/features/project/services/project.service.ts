@@ -4,9 +4,9 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { IListProject } from "../interfaces/IListProject";
 import { ICreateEditProject } from "../interfaces/ICreateEditProject";
-import { CreateEditStatus } from "../interfaces/CreateEditStatus";
+import { CreateEditStatus } from "../enums/CreateEditStatus";
+import { IProjectParams } from "../interfaces/IProjectParams";
 import { IProject } from "../interfaces/IProject";
-
 
 const apiUrl = environment.apiUrl;
 
@@ -15,20 +15,20 @@ export class ProjectService {
 
     constructor(private http: HttpClient) { }
 
-    GetByIdProject(id: string): Observable<IProject>{
-        return this.http.get<IProject>(`${apiUrl}projects/${id}`);
+    GetByIdProject(param: IProjectParams): Observable<IProject>{
+        return this.http.get<IProject>(`${apiUrl}projects/${param.id}`);
     }
 
     GetProjects(): Observable<IListProject[]> {
         return this.http.get<IListProject[]>(apiUrl + 'projects')
     }
 
-    CreateEditProject(screenType: CreateEditStatus, params: string, payload: ICreateEditProject): Observable<any> {
+    CreateEditProject(screenType: CreateEditStatus, params: any, payload: ICreateEditProject): Observable<any> {
 
         const url = `${apiUrl}projects`;
-        
+
         if (screenType === CreateEditStatus.edit) {
-            return this.http.put(`${url}/${params}`, payload);
+            return this.http.put(`${url}/${params?.id}`, payload);
         }
 
         return this.http.post(url, payload);
@@ -37,5 +37,4 @@ export class ProjectService {
     DeleteProject(id: string): Observable<void> {
         return this.http.delete<void>(`${apiUrl}projects/${id}`);
     }
-
 }

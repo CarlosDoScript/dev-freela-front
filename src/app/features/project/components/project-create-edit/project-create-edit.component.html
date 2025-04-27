@@ -1,13 +1,38 @@
 <div class="ld-project-create-edit">
     <app-ld-wrapper back="project/list">
 
-        <form class="left" onsubmit="createOrEdit()">
+        <form [formGroup]="createEditProjectForm" class="left" (ngSubmit)="createOrEdit()">
 
-            <h1 class="main-title" >{{messageTitleType}}</h1>
+            <h1 class="main-title">{{messageTitleType}}</h1>
 
-            <input required id="title" class="ld-input" placeholder="Título">
-            <input required id="totalCost" class="ld-input" placeholder="Custo Total">
-            <textarea required id="description" class="ld-input" placeholder="Descrição"></textarea>
+            <mat-form-field class="ld-input" appearance="outline">
+                <mat-label>Título</mat-label>
+                <input matInput formControlName="title">
+                <mat-error *ngIf="isInvalid('title','required')">{{ message.required}}</mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Custo Total</mat-label>
+                <input
+                  matInput
+                  type="text"
+                  formControlName="totalCost"
+                  mask="separator.2"
+                  thousandSeparator="."
+                  decimalMarker=","
+                  prefix="R$ "
+                  inputMode="decimal"
+                  placeholder="Digite o valor">
+                <mat-error *ngIf="isInvalid('totalCost', 'required')">
+                  {{ message.required }}
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field class="ld-input" appearance="outline">
+                <mat-label>Descrição</mat-label>
+                <textarea matInput formControlName="description"></textarea>
+                <mat-error *ngIf="isInvalid('description','required')">{{ message.required}}</mat-error>
+              </mat-form-field>
 
             <app-ld-button text="{{messageButtonType}}"></app-ld-button>
         </form>

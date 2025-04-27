@@ -14,7 +14,8 @@ export class AuthService{
     getUser():IUserHeader{
         return {
             name: localStorage.getItem('userName') ?? '',
-            role: localStorage.getItem('role') ?? ''
+            role: localStorage.getItem('role') ?? '',
+            clientId: localStorage.getItem('idClient') ?? ''
         };
     }
 

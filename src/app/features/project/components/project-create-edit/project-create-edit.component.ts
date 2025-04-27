@@ -3,17 +3,34 @@ import { LdWrapperComponent } from "../../../../shared/components/ld-wrapper/ld-
 import { LdBgCubesComponent } from "../../../../shared/components/ld-bg-cubes/ld-bg-cubes.component";
 import { LdButtonComponent } from "../../../../shared/components/ld-button/ld-button.component";
 import { ICreateEditProject } from '../../interfaces/ICreateEditProject';
-import { CreateEditStatus } from '../../interfaces/CreateEditStatus';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CreateEditStatus } from '../../enums/CreateEditStatus';
+import { FormBuilder, FormGroup, Validators,ReactiveFormsModule } from '@angular/forms';
 import { ProjectService } from '../../services/project.service';
-import { Router,ActivatedRoute  } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
 import { IProject } from '../../interfaces/IProject';
+import { message } from '@app/shared/utils/message';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { CommonModule } from '@angular/common';
+import { NgxMaskDirective} from 'ngx-mask';
+import { formatToCurrency } from '@app/shared/utils/extensions/number.extensions';
+import { AuthService } from '@app/core/services';
+import { IProjectParams } from '../../interfaces/IProjectParams';
 
 @Component({
   standalone: true,
   selector: 'app-project-create-edit',
-  imports: [LdWrapperComponent, LdBgCubesComponent, LdButtonComponent],
+  imports: [
+    LdWrapperComponent,
+    LdBgCubesComponent,
+    LdButtonComponent,
+    MatFormFieldModule,
+    MatInputModule,
+    CommonModule,
+    ReactiveFormsModule,
+    NgxMaskDirective
+  ],
   templateUrl: './project-create-edit.component.html',
   styleUrl: './project-create-edit.component.scss'
 })
@@ -28,31 +45,32 @@ export class ProjectCreateEditComponent implements OnInit {
     idClient: ''
   };
 
-  params: any = {};
+  params: IProjectParams = {};
 
   // Type: 'create' | 'edit'
-  screenType:CreateEditStatus = CreateEditStatus.create;
+  screenType: CreateEditStatus = CreateEditStatus.create;
   messageTitleType: string = '';
   messageButtonType: string = '';
+  message = message;
 
   constructor(
     private fb: FormBuilder,
     private projectService: ProjectService,
     private router: Router,
-    private activateRoute: ActivatedRoute
+    private activateRoute: ActivatedRoute,
+    private authService: AuthService
   ) {
     this.createEditProjectForm = this.fb.group({
       title: ['', Validators.required],
-      totalCost: ['', Validators.required],
+      totalCost: [null, Validators.required],
       description: ['', Validators.required],
-      idClient: ['', Validators.required],
     });
   }
 
   ngOnInit(): void {
     this.getParams();
   }
-  
+
   createOrEdit() {
 
     if (!this.createEditProjectForm.valid) {
@@ -60,7 +78,8 @@ export class ProjectCreateEditComponent implements OnInit {
       return;
     }
 
-    let payload: ICreateEditProject = this.createEditProjectForm.value;
+    let payload: ICreateEditProject  = this.createEditProjectForm.value;
+    payload.idClient = this.authService.getUser().clientId ?? '';
 
     this.projectService
       .CreateEditProject(this.screenType, this.params, payload)
@@ -101,12 +120,14 @@ export class ProjectCreateEditComponent implements OnInit {
   fillInputs() {
     if (this.screenType === CreateEditStatus.edit) {
       this.projectService
-        .GetByIdProject(this.params.id)
+        .GetByIdProject(this.params)
         .subscribe({
           next: (response: IProject) => {
-            this.createEditProject.title = response.title;
-            this.createEditProject.totalCost = response.totalCost;
-            this.createEditProject.description = response.description;
+            this.createEditProjectForm.patchValue({
+              title: response.title,
+              totalCost: response.totalCost,
+              description: response.description
+            })
           },
           error: (error: any) => {
             Swal.fire({
@@ -123,13 +144,13 @@ export class ProjectCreateEditComponent implements OnInit {
 
   getParams() {
     this.activateRoute.queryParams.subscribe((params) => {
-      this.params = params;
+      this.params = params as IProjectParams;
       this.screenType = this.params.id ? CreateEditStatus.edit : CreateEditStatus.create;
-      this.setScreenTypeTexts(); 
+      this.setScreenTypeTexts();
       this.fillInputs();
     });
   }
-  
+
   setScreenTypeTexts() {
     const texts = this.screenTexts[this.screenType];
     if (texts) {
@@ -148,5 +169,11 @@ export class ProjectCreateEditComponent implements OnInit {
       button: 'Salvar'
     }
   };
+
+
+  isInvalid(inputName: string, validatorName: string) {
+    const control = this.createEditProjectForm.get(inputName);
+    return !!(control?.errors?.[validatorName] && control.touched);
+  }
 
 }
