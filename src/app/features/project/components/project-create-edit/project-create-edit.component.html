@@ -8,7 +8,7 @@
             <mat-form-field class="ld-input" appearance="outline">
                 <mat-label>Título</mat-label>
                 <input matInput formControlName="title">
-                <mat-error *ngIf="isInvalid('title','required')">{{ message.required}}</mat-error>
+                <mat-error *ngIf="helpers.isInvalid(createEditProjectForm,'title','required')">{{ message.required}}</mat-error>
               </mat-form-field>
 
               <mat-form-field appearance="outline">
@@ -23,7 +23,7 @@
                   prefix="R$ "
                   inputMode="decimal"
                   placeholder="Digite o valor">
-                <mat-error *ngIf="isInvalid('totalCost', 'required')">
+                <mat-error *ngIf="helpers.isInvalid(createEditProjectForm,'totalCost', 'required')">
                   {{ message.required }}
                 </mat-error>
               </mat-form-field>
@@ -31,7 +31,7 @@
               <mat-form-field class="ld-input" appearance="outline">
                 <mat-label>Descrição</mat-label>
                 <textarea matInput formControlName="description"></textarea>
-                <mat-error *ngIf="isInvalid('description','required')">{{ message.required}}</mat-error>
+                <mat-error *ngIf="helpers.isInvalid(createEditProjectForm,'description','required')">{{ message.required}}</mat-error>
               </mat-form-field>
 
             <app-ld-button text="{{messageButtonType}}"></app-ld-button>

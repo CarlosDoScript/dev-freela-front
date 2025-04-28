@@ -11,6 +11,7 @@ import { message } from '@app/shared/utils/message';
 import { Router } from '@angular/router';
 import { IUser } from './interfaces/IUser';
 import { LdBgCubesComponent } from "../../shared/components/ld-bg-cubes/ld-bg-cubes.component";
+import { Helpers } from '@app/shared/utils/helper';
 
 @Component({
   standalone: true,
@@ -32,6 +33,7 @@ export class RegisterComponent {
 
   registerForm!: FormGroup;
   message = message;
+  helpers = Helpers;
 
   constructor(
     private fb: FormBuilder,
@@ -92,10 +94,5 @@ export class RegisterComponent {
 
   toogleRole(role: 'dev' | 'cliente') {
     this.registerForm.get('role')?.setValue(role);
-  }
-
-  isInvalid(inputName: string, validatorName: string) {
-    const control = this.registerForm.get(inputName);
-    return !!(control?.errors?.[validatorName] && control.touched);
   }
 }

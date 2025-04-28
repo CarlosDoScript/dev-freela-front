@@ -23,33 +23,33 @@
             <span class="checkmark"></span>
           </label>
         </div>
-        <span class="role-invalid" *ngIf="isInvalid('role','required')">Preencha uma role</span>
+        <span class="role-invalid" *ngIf="helpers.isInvalid(registerForm,'role','required')">Preencha uma role</span>
       </div>
 
       <mat-form-field class="campo-completo" appearance="outline">
         <mat-label>Nome Completo</mat-label>
         <input matInput formControlName="fullName">
-        <mat-error *ngIf="isInvalid('fullName','required')">{{ message.required}}</mat-error>
+        <mat-error *ngIf="helpers.isInvalid(registerForm,'fullName','required')">{{ message.required}}</mat-error>
       </mat-form-field>
 
       <mat-form-field class="campo-completo" appearance="outline">
         <mat-label>Data de nascimento</mat-label>
         <input type="date" matInput formControlName="birthDate">
-        <mat-error *ngIf="isInvalid('birthDate','required')">{{ message.required}}</mat-error>
+        <mat-error *ngIf="helpers.isInvalid(registerForm,'birthDate','required')">{{ message.required}}</mat-error>
       </mat-form-field>
 
       <mat-form-field class="campo-completo" appearance="outline">
         <mat-label>Email</mat-label>
         <input matInput formControlName="email">
-        <mat-error *ngIf="isInvalid('email','required')">{{ message.required}}</mat-error>
-        <mat-error *ngIf="isInvalid('email','email')">{{ message.email}}</mat-error>
+        <mat-error *ngIf="helpers.isInvalid(registerForm,'email','required')">{{ message.required}}</mat-error>
+        <mat-error *ngIf="helpers.isInvalid(registerForm,'email','email')">{{ message.email}}</mat-error>
       </mat-form-field>
 
 
       <mat-form-field class="campo-completo" appearance="outline">
         <mat-label>Senha</mat-label>
         <input type="password" matInput formControlName="password">
-        <mat-error *ngIf="isInvalid('password','required')">{{ message.required}}</mat-error>
+        <mat-error *ngIf="helpers.isInvalid(registerForm,'password','required')">{{ message.required}}</mat-error>
       </mat-form-field>
 
       <app-ld-button text="Continuar"></app-ld-button>

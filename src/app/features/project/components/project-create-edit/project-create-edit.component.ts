@@ -14,9 +14,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { CommonModule } from '@angular/common';
 import { NgxMaskDirective} from 'ngx-mask';
-import { formatToCurrency } from '@app/shared/utils/extensions/number.extensions';
 import { AuthService } from '@app/core/services';
 import { IProjectParams } from '../../interfaces/IProjectParams';
+import { Helpers } from '@app/shared/utils/helper';
 
 @Component({
   standalone: true,
@@ -52,6 +52,7 @@ export class ProjectCreateEditComponent implements OnInit {
   messageTitleType: string = '';
   messageButtonType: string = '';
   message = message;
+  helpers = Helpers;
 
   constructor(
     private fb: FormBuilder,
@@ -169,11 +170,4 @@ export class ProjectCreateEditComponent implements OnInit {
       button: 'Salvar'
     }
   };
-
-
-  isInvalid(inputName: string, validatorName: string) {
-    const control = this.createEditProjectForm.get(inputName);
-    return !!(control?.errors?.[validatorName] && control.touched);
-  }
-
 }
